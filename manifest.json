@@ -1,20 +1,8 @@
 {
-    "name": "PDF Name Suggestor",
+    "name": "Name Suggestor",
     "version": "1.0",
-    "description": "Suggest file names for PDF files for a user to save.",
+    "description": "Build Extension!",
     "manifest_version": 2,
-
-    "content_scripts": [
-        {
-            "matches": [
-                "http://*/*.pdf",
-                "https://*/*.pdf",
-                "file://*/*.pdf"
-            ],
-            "js": ["content.js",
-                   "detailExtractor.js"]
-        }
-    ],
 
     "background": {
         "scripts": ["background.js"]
