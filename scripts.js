@@ -45,6 +45,21 @@ function checkTicked3() {
     document.getElementById('textBox4').value = current;
 }
 
+function saveButtonClicked() {
+    var checkbox = document.getElementById('checkBox3');
+    var data = document.getElementById('textBox3').value;
+    var current = document.getElementById('textBox4').value;
+    if(threeCount % 2 == 0) {
+        current += data;
+        threeCount++;
+    }
+    else {
+        current = current.replace(data, "");
+        threeCount++;
+    }
+    document.getElementById('textBox4').value = current;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('checkbox1').addEventListener('click', checkTicked1);
 });
@@ -55,4 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('checkbox3').addEventListener('click', checkTicked3);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('savebutton').addEventListener('click', saveButtonClicked);
 });
