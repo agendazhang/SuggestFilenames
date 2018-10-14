@@ -1,7 +1,7 @@
 {
-    "name": "Name Suggestor",
+    "name": "PDF Name Suggester",
     "version": "1.0",
-    "description": "Build Extension!",
+    "description": "This extension suggests file names for you to save your PDF files.",
     "manifest_version": 2,
 
     "background": {
