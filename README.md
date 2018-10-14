@@ -1,4 +1,4 @@
-PDF Name Suggester
+PDF Namer
 ==
 ## How to use the extension
 
