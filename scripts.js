@@ -73,14 +73,18 @@ function checkTicked3() {
 
 function saveButtonClicked() {
     var fileNameWritten = document.getElementById('textBox4').value + ".pdf";
-    var urlWritten = "";
-    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-        urlWritten = tabs[0].url;
+    if(fileNameWritten != ".pdf") {
+        /*
+        chrome.tabs.getSelected(null, function(tab) {
+            var link = document.createElement('a');
+            link.href = tab.url;
+            urlWritten = link.hostname;
+        });
+        */
 
-    });
-    if(fileNameWritten != ".pdf" && urlWritten !) {
+        console.log(urlWritten);
         chrome.downloads.download({
-            url: "http://www.google.com",
+            url: urlWritten,
             filename: fileNameWritten,
             saveAs: true
         }, function(downloadId) {
@@ -89,9 +93,12 @@ function saveButtonClicked() {
     }
 }
 
-console.log("hi");
-
+var urlWritten;
 document.addEventListener('DOMContentLoaded', function () {
+    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+        urlWritten = tabs[0].url;
+    });
+
     document.getElementById('checkbox1').addEventListener('click', checkTicked1);
     document.getElementById('checkbox2').addEventListener('click', checkTicked2);
     document.getElementById('checkbox3').addEventListener('click', checkTicked3);
