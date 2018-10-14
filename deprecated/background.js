@@ -22,7 +22,7 @@ chrome.runtime.onInstalled.addListener(function() {
      ]);
    });
  });
- 
+
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.call == "getPrevTitle") {
         chrome.history.getVisits({
@@ -57,3 +57,14 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     }
     return true; // very important for asynchronous requests
 });
+
+var activeTab;
+function getActiveTabId(callback) {
+    chrome.tabs.query({
+            active: true
+        },
+        function (tabArray) {
+            callback(tabArray[0]);
+        });
+}
+getActiveTabId(function (tab) { activeTab = tab.id; });
