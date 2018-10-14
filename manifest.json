@@ -12,5 +12,5 @@
         "default_popup": "popup.html",
         "default_title": "Suggest file names!"
     },
-    "permissions": ["history", "tabs", "storage", "declarativeContent"]
+    "permissions": ["history", "tabs", "storage", "declarativeContent", "notifications", "contextMenus"]
 }

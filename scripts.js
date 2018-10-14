@@ -71,12 +71,25 @@ function checkTicked3() {
     document.getElementById('textBox4').value = current;
 }
 
+function saveButtonClicked() {
+    chrome.storage.sync.set({
+    fileNamePrefix: document.getElementById('textBox4').value,
+  }, function() {
+    var status = document.getElementById('savebutton');
+    status.textContent = 'Options saved.';
+    setTimeout(function() {
+      status.textContent = '';
+    }, 5000);
+  });
+}
+
 console.log("hi");
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('checkbox1').addEventListener('click', checkTicked1);
     document.getElementById('checkbox2').addEventListener('click', checkTicked2);
     document.getElementById('checkbox3').addEventListener('click', checkTicked3);
+    document.getElementById('savebutton').addEventListener('click', saveButtonClicked);
     chrome.runtime.sendMessage({
             call: "getPrevTitle",
             url: document.URL
