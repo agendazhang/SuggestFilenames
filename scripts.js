@@ -27,7 +27,7 @@ function create() {
     document.getElementById(""+count).addEventListener('click', function () {
         var current = document.getElementById('finalTextBox').value;
         current += data;
-        document.getElementById('finalTextBox').value = data;
+        document.getElementById('finalTextBox').value = current;
     });
     count++;
 }
