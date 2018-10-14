@@ -1,11 +1,11 @@
 function get_prev_html_title() {
     chrome.runtime.sendMessage({
-            call: "getPrevTitle",
-            url: document.URL
-        },
-        function (response) {
-            console.log(response);
-        });
+        call: "getPrevTitle",
+        url: document.URL
+    },
+    function (response) {
+        console.log(response);
+    });
 }
 
 // Doesn't work for .pdf files (only body tags appear)
@@ -72,15 +72,21 @@ function checkTicked3() {
 }
 
 function saveButtonClicked() {
-    chrome.storage.sync.set({
-    fileNamePrefix: document.getElementById('textBox4').value,
-  }, function() {
-    var status = document.getElementById('savebutton');
-    status.textContent = 'Options saved.';
-    setTimeout(function() {
-      status.textContent = '';
-    }, 5000);
-  });
+    var fileNameWritten = document.getElementById('textBox4').value + ".pdf";
+    var urlWritten = "";
+    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+        urlWritten = tabs[0].url;
+
+    });
+    if(fileNameWritten != ".pdf" && urlWritten !) {
+        chrome.downloads.download({
+            url: "http://www.google.com",
+            filename: fileNameWritten,
+            saveAs: true
+        }, function(downloadId) {
+            console.log("File saved!");
+        });
+    }
 }
 
 console.log("hi");
@@ -90,12 +96,4 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('checkbox2').addEventListener('click', checkTicked2);
     document.getElementById('checkbox3').addEventListener('click', checkTicked3);
     document.getElementById('savebutton').addEventListener('click', saveButtonClicked);
-    chrome.runtime.sendMessage({
-            call: "getPrevTitle",
-            url: document.URL
-        },
-        function (response) {
-            console.log(response);
-            document.getElementById('checkbox1').value = response;
-        });
 });
