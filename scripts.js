@@ -14,9 +14,25 @@ function loadStorage() {
 
         // newButton.value = data;
         createNewEventListener(newButton);
+
         BUTTONID++;
     }
 }
+
+var count = 1;
+function create() {
+    var data = document.getElementById('addMeBox').value;
+    document.getElementById('addNewControls').innerHTML+='<input type="button" id="'+count+'" value="'+data+'">';
+    //e.prventDefault();
+    document.getElementById(""+count).addEventListener('click', function () {
+        var current = document.getElementById('finalTextBox').value;
+        current += data;
+        document.getElementById('finalTextBox').value = data;
+    });
+    count++;
+}
+
+
 
 function clickAddMeButton() {
     // Create new button with value, in "addNewControls" container
@@ -33,9 +49,9 @@ function clickAddMeButton() {
 
     // newButton.value = data;
     newButton.addEventListener('click', function() {
-        var data = document.getElementById('addMeBox').value;
-        var current = document.getElementById('finalTextBox').value;
-        document.getElementById('finalTextBox').value = current + data;
+        var copyData = document.getElementById('addMeBox').value;
+        current += data;
+        document.getElementById('finalTextBox').value = current;
     });
 
     //ADD STORAGE GLOBALLY
@@ -69,5 +85,5 @@ var urlWritten;
     });
     loadStorage();
 
-    document.getElementById('addMeButton').addEventListener('click', clickAddMeButton);
+    document.getElementById('addMeButton').addEventListener('click', create);
     document.getElementById('savebutton').addEventListener('click', saveButtonClicked);
